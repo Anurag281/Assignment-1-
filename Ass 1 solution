@@ -1,0 +1,48 @@
+create Table Customer (
+Customer_Id int primary key,
+Name varchar (255) not null,
+Address varchar(255) not null,
+Phone_Number varchar(255) not null,
+Email varchar(255) Unique
+);
+
+insert into Customer (Customer_Id,Name,Address,Phone_Number,Email) Values(1, "John","123street","555-123-4567","john23@example.com" ),
+ (2, "Roy","Cluckin street","555-153-4817","Roy23@example.com" ),(3, "Kevin","Dollar street","555-173-8567","Kevin23@example.com" );
+ 
+
+select * from Customer;
+ 
+ 
+ create Table Meter (
+Meter_Id int primary key,
+Installation_Date date not null,
+Last_Reading_Date date not null,
+Customer_Id int foreign key references Customer(Customer_Id)
+on delete cascade
+);
+
+insert into Meter(Meter_Id, Customer_Id,Installation_Date,Last_Reading_Date)Values(1,1,'2023-01-15','2024-07-01'),
+(2,2,'2022-12-01', '2024-07-05'),(3,3,'2024-03-10','2024-06-30');
+
+ select * from Meter;
+ 
+ 
+ create Table Electrcity_Usage(
+ Usage_Id int primary key,
+ Meter_Id int foreign key references Meter(Meter_Id) on delete cascade,
+ Reading_Date date not null ,
+ Usage_Units decimal(10,2) check(Usage_Units >=0),
+ );
+  
+ insert into Electrcity_Usage(Usage_Id,Meter_Id,Reading_Date,Usage_Units) Values
+ (1,1,'2024-01-10',100),
+ (2,1,'2024-02-10',120),
+ (3,1,'2024-03-10',150),
+ (4,2,'2024-07-15',110),
+ (5,2,'2024-05-15',50), 
+ (6,2,'2024-04-15',90), 
+ (7,3,'2024-06-15',140), 
+ (8,3,'2024-08-15',160), 
+ (9,3,'2024-09-15',170);
+ 
+ select * from Electrcity_Usage;
