@@ -46,3 +46,19 @@ insert into Meter(Meter_Id, Customer_Id,Installation_Date,Last_Reading_Date)Valu
  (9,3,'2024-09-15',170);
  
  select * from Electrcity_Usage;
+
+
+create table Bill(
+ Bill_Id int primary key,
+ Meter_Id int foreign key references Meter(Meter_Id)on delete cascade,
+ Bill_Date Date not null,
+ AmountDue numeric(10,2) not null check (AmountDue >=0),
+ DueDate Date not null,
+ Paid bit not null default 0,
+
+ );
+
+ insert into Bill (Bill_Id,Meter_Id,Bill_Date,AmountDue,DueDate,Paid)Values(1,1,'2024-07-05',120.00,'2024-07-20',0),
+ (2,2,'2024-07-06',150.00,'2024-07-21',0),(3,3,'2024-07-07',250.00,'2024-07-22',0);
+ 
+ select * from Bill;
