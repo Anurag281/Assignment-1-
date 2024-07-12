@@ -62,3 +62,16 @@ create table Bill(
  (2,2,'2024-07-06',150.00,'2024-07-21',0),(3,3,'2024-07-07',250.00,'2024-07-22',0);
  
  select * from Bill;
+
+create table Payment(
+ Payment_id int primary key,
+ Bill_Id int foreign key references Bill(Bill_Id)on delete cascade,
+ Payment_Date Date  not null,
+ AmountPaid numeric(10,2) not null check (AmountPaid >=0),
+ );
+ 
+ insert into Payment (Payment_id,Bill_id,Payment_Date,AmountPaid) Values(1,1,'2024-07-15',120.00),
+ (2,2,'2024-07-18',150.00),
+ (3,3,'2024-07-21',250.00);
+ 
+ select * from Payment;
